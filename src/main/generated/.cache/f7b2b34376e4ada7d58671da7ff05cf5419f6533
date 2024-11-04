@@ -1,3 +1,3 @@
-// 1.20.4	2024-04-15T08:54:16.1167807	Operation: Starcleave/Tags for minecraft:entity_type
-af2b2ed999e46794daa61c28ad78ce1d79bbc868 data\minecraft\tags\entity_types\fall_damage_immune.json
-af2b2ed999e46794daa61c28ad78ce1d79bbc868 data\minecraft\tags\entity_types\freeze_immune_entity_types.json
+// 1.21.1	2024-11-04T16:11:29.830137	Operation: Starcleave/Tags for minecraft:entity_type
+35d0d8da579e1533b5bceb99f02b15da3c9d6d87 data/minecraft/tags/entity_type/freeze_immune_entity_types.json
+35d0d8da579e1533b5bceb99f02b15da3c9d6d87 data/minecraft/tags/entity_type/fall_damage_immune.json
