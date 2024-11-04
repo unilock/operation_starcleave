@@ -23,15 +23,15 @@ import phanastrae.operation_starcleave.world.firmament.*;
 public class OperationStarcleaveClientPacketHandler {
 
     public static void init() {
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.START_FIRMAMENT_REGION_SEND_S2C, OperationStarcleaveClientPacketHandler::startFirmamentRegionSend);
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.FIRMAMENT_REGION_DATA_S2C, OperationStarcleaveClientPacketHandler::receiveFirmamentRegionData);
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.FIRMAMENT_REGION_SENT_S2C, OperationStarcleaveClientPacketHandler::sentFirmamentRegion);
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.UPDATE_FIRMAMENT_SUB_REGION_S2C, OperationStarcleaveClientPacketHandler::updateFirmamentSubRegion);
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.UNLOAD_FIRMAMENT_REGION_S2C, OperationStarcleaveClientPacketHandler::unloadFirmamentRegion);
+        ClientPlayNetworking.registerGlobalReceiver(StartFirmamentRegionSendS2CPacket.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.startFirmamentRegionSend(pkt, ctx.player(), ctx.responseSender()));
+        ClientPlayNetworking.registerGlobalReceiver(FirmamentRegionDataS2CPacket.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.receiveFirmamentRegionData(pkt, ctx.player(), ctx.responseSender()));
+        ClientPlayNetworking.registerGlobalReceiver(FirmamentRegionSentS2CPacket.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.sentFirmamentRegion(pkt, ctx.player(), ctx.responseSender()));
+        ClientPlayNetworking.registerGlobalReceiver(UpdateFirmamentSubRegionS2CPacket.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.updateFirmamentSubRegion(pkt, ctx.player(), ctx.responseSender()));
+        ClientPlayNetworking.registerGlobalReceiver(UnloadFirmamentRegionS2CPacket.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.unloadFirmamentRegion(pkt, ctx.player(), ctx.responseSender()));
 
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.FIRMAMENT_CLEAVED_S2C, OperationStarcleaveClientPacketHandler::onFirmamentCleaved);
+        ClientPlayNetworking.registerGlobalReceiver(FirmamentCleavedS2CPacket.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.onFirmamentCleaved(pkt, ctx.player(), ctx.responseSender()));
 
-        ClientPlayNetworking.registerGlobalReceiver(OperationStarcleavePacketTypes.STARBLEACHED_PEARL_LAUNCH_PACKET_S2C, OperationStarcleaveClientPacketHandler::onStarbleachedPearlLaunch);
+        ClientPlayNetworking.registerGlobalReceiver(StarbleachedPearlLaunchPacketS2C.ID, (pkt, ctx) -> OperationStarcleaveClientPacketHandler.onStarbleachedPearlLaunch(pkt, ctx.player(), ctx.responseSender()));
     }
 
     private static void startFirmamentRegionSend(StartFirmamentRegionSendS2CPacket packet, ClientPlayerEntity player, PacketSender responseSender) {
@@ -42,16 +42,16 @@ public class OperationStarcleaveClientPacketHandler {
         World world = player.getWorld();
         Firmament firmament = Firmament.fromWorld(world);
         if(firmament != null) {
-            FirmamentRegion firmamentRegion = firmament.getFirmamentRegion(packet.regionId);
+            FirmamentRegion firmamentRegion = firmament.getFirmamentRegion(packet.regionId());
             if(firmamentRegion == null) {
                 if(firmament.getFirmamentRegionManager() instanceof ClientFirmamentRegionManager clientFirmamentRegionManager) {
-                    FirmamentRegionHolder firmamentRegionHolder = clientFirmamentRegionManager.loadRegion(packet.regionId);
+                    FirmamentRegionHolder firmamentRegionHolder = clientFirmamentRegionManager.loadRegion(packet.regionId());
                     firmamentRegion = firmamentRegionHolder.getFirmamentRegion();
                 }
             }
 
             if(firmamentRegion != null) {
-                firmamentRegion.readFromData(packet.firmamentRegionData);
+                firmamentRegion.readFromData(packet.firmamentRegionData());
                 FirmamentTextureStorage.getInstance().onRegionAdded(firmamentRegion, world);
             }
         }
@@ -59,7 +59,7 @@ public class OperationStarcleaveClientPacketHandler {
 
     private static void sentFirmamentRegion(FirmamentRegionSentS2CPacket packet, ClientPlayerEntity player, PacketSender responseSender) {
         ChunkBatchSizeCalculator firmamentRegionBatchSizeCalculator = ((OperationStarcleaveClientPlayNetworkHandler)player.networkHandler).operation_starcleave$getFirmamentRegionBatchSizeCalculator();
-        firmamentRegionBatchSizeCalculator.onChunkSent(packet.batchSize);
+        firmamentRegionBatchSizeCalculator.onChunkSent(packet.batchSize());
 
         responseSender.sendPacket(new AcknowledgeFirmamentRegionDataC2SPacket(firmamentRegionBatchSizeCalculator.getDesiredChunksPerTick()));
     }
@@ -68,10 +68,10 @@ public class OperationStarcleaveClientPacketHandler {
         World world = player.getWorld();
         Firmament firmament = Firmament.fromWorld(world);
         if(firmament != null) {
-            FirmamentSubRegion firmamentSubRegion = firmament.getSubRegionFromId(packet.id);
+            FirmamentSubRegion firmamentSubRegion = firmament.getSubRegionFromId(packet.id());
 
             if(firmamentSubRegion != null) {
-                firmamentSubRegion.readFromData(packet.subRegionData);
+                firmamentSubRegion.readFromData(packet.subRegionData());
 
                 FirmamentTextureStorage.getInstance().onSubRegionUpdated(firmamentSubRegion, world);
             }
@@ -82,7 +82,7 @@ public class OperationStarcleaveClientPacketHandler {
         Firmament firmament = Firmament.fromWorld(player.getWorld());
         if(firmament != null) {
             if(firmament.getFirmamentRegionManager() instanceof ClientFirmamentRegionManager clientFirmamentRegionManager) {
-                clientFirmamentRegionManager.unloadRegion(packet.regionId);
+                clientFirmamentRegionManager.unloadRegion(packet.regionId());
             }
         }
     }
@@ -90,12 +90,12 @@ public class OperationStarcleaveClientPacketHandler {
     private static void onFirmamentCleaved(FirmamentCleavedS2CPacket packet, ClientPlayerEntity player, PacketSender responseSender) {
         World world = player.getWorld();
         ((OperationStarcleaveWorld)world).operation_starcleave$setCleavingFlashTicksLeft(24);
-        Vec3d pos = new Vec3d(packet.x, world.getTopY() + 16, packet.z);
+        Vec3d pos = new Vec3d(packet.x(), world.getTopY() + 16, packet.z());
         world.playSound(
                 pos.x,
                 pos.y,
                 pos.z,
-                SoundEvents.ITEM_TRIDENT_THUNDER,
+                SoundEvents.ITEM_TRIDENT_THUNDER.value(),
                 SoundCategory.BLOCKS,
                 500.0F,
                 1.6F + world.random.nextFloat() * 0.2F,
@@ -113,12 +113,12 @@ public class OperationStarcleaveClientPacketHandler {
 
     public static void onStarbleachedPearlLaunch(StarbleachedPearlLaunchPacketS2C packet, ClientPlayerEntity player, PacketSender responseSender) {
         Entity except = null;
-        if(packet.exceptExists) {
-            Entity e = player.getWorld().getEntityById(packet.exceptId);
+        if(packet.exceptExists()) {
+            Entity e = player.getWorld().getEntityById(packet.exceptId());
             if(e != null) {
                 except = e;
             }
         }
-        StarbleachedPearlEntity.doRepulsion(packet.pos, packet.radius, packet.maxAddedSpeed, player.getWorld(), except);
+        StarbleachedPearlEntity.doRepulsion(packet.pos(), packet.radius(), packet.maxAddedSpeed(), player.getWorld(), except);
     }
 }

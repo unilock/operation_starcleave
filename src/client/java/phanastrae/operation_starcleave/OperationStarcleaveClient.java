@@ -71,7 +71,7 @@ public class OperationStarcleaveClient implements ClientModInitializer {
 			if(firmament != null) {
 				firmament.forEachActor(firmamentActor -> {
 					if(firmamentActor instanceof FirmamentActorRenderable far) {
-						far.render(worldRenderContext.matrixStack(), worldRenderContext.consumers(), worldRenderContext.tickDelta(), worldRenderContext.camera());
+						far.render(worldRenderContext.matrixStack(), worldRenderContext.consumers(), worldRenderContext.tickCounter().getTickDelta(false), worldRenderContext.camera());
 					}
 				});
 			}
@@ -99,7 +99,7 @@ public class OperationStarcleaveClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(OperationStarcleaveBlocks.SHORT_HOLY_MOSS, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(OperationStarcleaveBlocks.BLESSED_BED, RenderLayer.getCutout());
 
-		ItemTooltipCallback.EVENT.register(((stack, context, lines) -> {
+		ItemTooltipCallback.EVENT.register(((stack, context, type, lines) -> {
 			if(StarbleachCoating.hasStarbleachCoating(stack)) {
 				lines.add(StarbleachCoating.getText());
 			}
