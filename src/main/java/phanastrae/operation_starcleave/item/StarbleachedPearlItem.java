@@ -1,7 +1,6 @@
 package phanastrae.operation_starcleave.item;
 
 import net.minecraft.entity.player.PlayerEntity;
-import phanastrae.operation_starcleave.entity.projectile.StarbleachedPearlEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -10,6 +9,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import phanastrae.operation_starcleave.entity.projectile.StarbleachedPearlEntity;
 
 public class StarbleachedPearlItem extends Item {
     public StarbleachedPearlItem(Settings settings) {

@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.minecraft.network.PacketByteBuf;
 import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
-import phanastrae.operation_starcleave.world.firmament.FirmamentSubRegion;
 import phanastrae.operation_starcleave.world.firmament.FirmamentSubRegionData;
 
 public class UpdateFirmamentSubRegionS2CPacket implements FabricPacket {

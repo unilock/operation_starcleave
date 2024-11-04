@@ -17,11 +17,14 @@ import phanastrae.operation_starcleave.block.entity.OperationStarcleaveBlockEnti
 import phanastrae.operation_starcleave.item.StarbleachCoating;
 import phanastrae.operation_starcleave.network.OperationStarcleaveClientPacketHandler;
 import phanastrae.operation_starcleave.particle.OperationStarcleaveParticles;
-import phanastrae.operation_starcleave.render.shader.OperationStarcleaveShaders;
 import phanastrae.operation_starcleave.render.ScreenShakeManager;
 import phanastrae.operation_starcleave.render.entity.BlessedBedBlockEntityRenderer;
 import phanastrae.operation_starcleave.render.entity.OperationStarcleaveEntityRenderers;
-import phanastrae.operation_starcleave.render.firmament.*;
+import phanastrae.operation_starcleave.render.firmament.FirmamentActorRenderable;
+import phanastrae.operation_starcleave.render.firmament.FirmamentOutlineRenderer;
+import phanastrae.operation_starcleave.render.firmament.FirmamentRenderer;
+import phanastrae.operation_starcleave.render.firmament.FirmamentTextureStorage;
+import phanastrae.operation_starcleave.render.shader.OperationStarcleaveShaders;
 import phanastrae.operation_starcleave.world.OperationStarcleaveWorld;
 import phanastrae.operation_starcleave.world.firmament.Firmament;
 

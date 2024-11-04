@@ -1,14 +1,12 @@
 package phanastrae.operation_starcleave.block;
 
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BedPart;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ColorCode;
-import net.minecraft.util.DyeColor;
 import phanastrae.operation_starcleave.OperationStarcleave;
 
 import static net.minecraft.block.Blocks.CAULDRON;

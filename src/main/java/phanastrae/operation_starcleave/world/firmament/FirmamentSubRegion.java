@@ -5,7 +5,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.util.TriConsumer;
-import phanastrae.operation_starcleave.OperationStarcleave;
 import phanastrae.operation_starcleave.network.packet.s2c.UpdateFirmamentSubRegionS2CPacket;
 
 import java.nio.ByteBuffer;

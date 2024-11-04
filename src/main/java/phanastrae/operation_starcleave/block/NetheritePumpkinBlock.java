@@ -6,7 +6,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.WearableCarvedPumpkinBlock;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.BlockPatternBuilder;
-
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

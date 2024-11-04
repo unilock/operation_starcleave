@@ -16,12 +16,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.world.World;
-import org.joml.*;
 import org.joml.Math;
+import org.joml.*;
 import phanastrae.operation_starcleave.item.OperationStarcleaveItems;
 import phanastrae.operation_starcleave.mixin.client.WorldRendererAccessor;
 import phanastrae.operation_starcleave.render.OperationStarcleaveRenderLayers;
@@ -29,9 +28,6 @@ import phanastrae.operation_starcleave.render.OperationStarcleaveWorldRenderer;
 import phanastrae.operation_starcleave.world.firmament.Firmament;
 import phanastrae.operation_starcleave.world.firmament.FirmamentSubRegion;
 import phanastrae.operation_starcleave.world.firmament.RegionPos;
-import phanastrae.operation_starcleave.world.firmament.SubRegionPos;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FirmamentRenderer {
     public static void render(WorldRenderContext worldRenderContext) {

@@ -1,7 +1,6 @@
 package phanastrae.operation_starcleave.world.firmament;
 
 import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.world.firmament.FirmamentSubRegion;
 
 public class FirmamentSubRegionData {
 

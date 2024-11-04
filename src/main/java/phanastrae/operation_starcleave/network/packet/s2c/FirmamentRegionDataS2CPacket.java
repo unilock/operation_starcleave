@@ -4,7 +4,9 @@ import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.minecraft.network.PacketByteBuf;
 import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
-import phanastrae.operation_starcleave.world.firmament.*;
+import phanastrae.operation_starcleave.world.firmament.FirmamentRegion;
+import phanastrae.operation_starcleave.world.firmament.FirmamentRegionData;
+import phanastrae.operation_starcleave.world.firmament.RegionPos;
 
 public class FirmamentRegionDataS2CPacket implements FabricPacket {
 
