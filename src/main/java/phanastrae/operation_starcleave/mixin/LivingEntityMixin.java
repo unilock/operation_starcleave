@@ -1,6 +1,7 @@
 package phanastrae.operation_starcleave.mixin;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,7 @@ public class LivingEntityMixin {
     @Shadow private int jumpingCooldown;
 
     @Inject(method = "eatFood", at = @At("HEAD"))
-    private void operation_starcleave$eatStarbleachedFood(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+    private void operation_starcleave$eatStarbleachedFood(World world, ItemStack stack, FoodComponent foodComponent, CallbackInfoReturnable<ItemStack> cir) {
         StarbleachCoating.onEat((LivingEntity)(Object)this, world, stack);
     }
 

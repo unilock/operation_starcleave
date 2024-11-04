@@ -52,7 +52,7 @@ public class FirmamentOutlineRenderer {
             } else {
                 // damage present
                 double distance = lookVec.length() * t;
-                double reachDistance = client.interactionManager.getReachDistance();
+                double reachDistance = client.player.getBlockInteractionRange();
                 if(distance > reachDistance) {
                     // tile too far away
                     this.hitTile = null;
@@ -106,12 +106,10 @@ public class FirmamentOutlineRenderer {
                     m /= n;
                     vertexConsumer.vertex(entry.getPositionMatrix(), (float)(minX + offsetX), (float)(minY + offsetY), (float)(minZ + offsetZ))
                             .color(red, green, blue, alpha)
-                            .normal(entry.getNormalMatrix(), k, l, m)
-                            .next();
+                            .normal(matrices.peek(), k, l, m);
                     vertexConsumer.vertex(entry.getPositionMatrix(), (float)(maxX + offsetX), (float)(maxY + offsetY), (float)(maxZ + offsetZ))
                             .color(red, green, blue, alpha)
-                            .normal(entry.getNormalMatrix(), k, l, m)
-                            .next();
+                            .normal(matrices.peek(), k, l, m);
                 }
         );
     }
