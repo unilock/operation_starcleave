@@ -95,12 +95,12 @@ public class FirmamentPostShader {
         GameRenderer gameRenderer = client.gameRenderer;
 
         RenderSystem.assertOnRenderThread();
-        GlStateManager._colorMask(true, true, true, false);
-        GlStateManager._disableDepthTest();
-        GlStateManager._depthMask(false);
-        GlStateManager._viewport(0, 0, width, height);
+        RenderSystem.colorMask(true, true, true, false);
+        RenderSystem.disableDepthTest();
+        RenderSystem.depthMask(false);
+        RenderSystem.viewport(0, 0, width, height);
         if (disableBlend) {
-            GlStateManager._disableBlend();
+            RenderSystem.disableBlend();
         }
 
         Framebuffer mainBuffer = client.getFramebuffer();
@@ -166,9 +166,9 @@ public class FirmamentPostShader {
         bufferBuilder.vertex(f, g, 0.0F).texture(h, 0.0F).color(255, 255, 255, 255);
         bufferBuilder.vertex(f, 0.0F, 0.0F).texture(h, i).color(255, 255, 255, 255);
         bufferBuilder.vertex(0.0F, 0.0F, 0.0F).texture(0.0F, i).color(255, 255, 255, 255);
-        BufferRenderer.draw(bufferBuilder.end()); // TODO: .drawWithGlobalProgram
+        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
         shaderProgram.unbind();
-        GlStateManager._depthMask(true);
-        GlStateManager._colorMask(true, true, true, true);
+        RenderSystem.depthMask(true);
+        RenderSystem.colorMask(true, true, true, true);
     }
 }

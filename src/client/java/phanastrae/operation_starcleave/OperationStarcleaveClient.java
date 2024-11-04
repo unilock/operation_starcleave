@@ -62,7 +62,7 @@ public class OperationStarcleaveClient implements ClientModInitializer {
 			ScreenShakeManager.getInstance().update();
 		});
 
-		WorldRenderEvents.BEFORE_ENTITIES.register(worldRenderContext -> {
+		WorldRenderEvents.AFTER_ENTITIES.register(worldRenderContext -> {
 			FirmamentTextureStorage.getInstance().tick();
 
 			FirmamentRenderer.render(worldRenderContext);

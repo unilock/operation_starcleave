@@ -15,6 +15,7 @@ import phanastrae.operation_starcleave.block.StarbleachCauldronBlock;
 import phanastrae.operation_starcleave.block.entity.OperationStarcleaveBlockEntityTypes;
 import phanastrae.operation_starcleave.entity.OperationStarcleaveEntityTypes;
 import phanastrae.operation_starcleave.entity.effect.OperationStarcleaveStatusEffects;
+import phanastrae.operation_starcleave.item.OperationStarcleaveComponentTypes;
 import phanastrae.operation_starcleave.item.OperationStarcleaveItems;
 import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
 import phanastrae.operation_starcleave.particle.OperationStarcleaveParticleTypes;
@@ -34,6 +35,7 @@ public class OperationStarcleave implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		OperationStarcleaveComponentTypes.init();
 		OperationStarcleaveEntityTypes.init();
 		OperationStarcleaveBlocks.init();
 		OperationStarcleaveItems.init();

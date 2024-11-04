@@ -22,11 +22,11 @@ public class StarbleachCoating {
     }
 
     public static boolean hasStarbleachCoating(ItemStack itemStack) {
-        return itemStack.getOrDefault(OperationStarcleaveComponents.STARBLEACHED, false);
+        return itemStack.getOrDefault(OperationStarcleaveComponentTypes.STARBLEACHED, false);
     }
 
     public static void addStarbleach(ItemStack itemStack) {
-        itemStack.set(OperationStarcleaveComponents.STARBLEACHED, true);
+        itemStack.set(OperationStarcleaveComponentTypes.STARBLEACHED, true);
     }
 
     public static boolean canAddStarbleach(ItemStack itemStack) {
@@ -34,7 +34,7 @@ public class StarbleachCoating {
             return false;
         }
 
-        boolean hasStarbleach = itemStack.getOrDefault(OperationStarcleaveComponents.STARBLEACHED, false);
+        boolean hasStarbleach = itemStack.getOrDefault(OperationStarcleaveComponentTypes.STARBLEACHED, false);
         if(hasStarbleach) {
             return false;
         }

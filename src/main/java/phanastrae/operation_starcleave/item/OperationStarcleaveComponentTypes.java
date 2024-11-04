@@ -9,7 +9,7 @@ import phanastrae.operation_starcleave.OperationStarcleave;
 
 import java.util.function.UnaryOperator;
 
-public class OperationStarcleaveComponents {
+public class OperationStarcleaveComponentTypes {
     public static final ComponentType<Boolean> STARBLEACHED = register("starbleached", builder -> builder.codec(Codec.BOOL).packetCodec(PacketCodecs.BOOL));
 
     public static void init() {
