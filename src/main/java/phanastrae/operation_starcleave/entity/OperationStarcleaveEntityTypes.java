@@ -24,19 +24,19 @@ public class OperationStarcleaveEntityTypes {
     public static final EntityType<SplashStarbleachEntity> SPLASH_STARBLEACH = Registry.register(
             Registries.ENTITY_TYPE,
             OperationStarcleave.id("splash_starbleach_bottle"),
-            FabricEntityTypeBuilder.<SplashStarbleachEntity>create(SpawnGroup.MISC, SplashStarbleachEntity::new).dimensions(new EntityDimensions(0.25F, 0.25F, true)).trackRangeChunks(4).trackedUpdateRate(10).build()
+            FabricEntityTypeBuilder.<SplashStarbleachEntity>create(SpawnGroup.MISC, SplashStarbleachEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build()
     );
 
     public static final EntityType<StarbleachedPearlEntity> STARBLEACHED_PEARL = Registry.register(
             Registries.ENTITY_TYPE,
             OperationStarcleave.id("starbleached_pearl"),
-            FabricEntityTypeBuilder.<StarbleachedPearlEntity>create(SpawnGroup.MISC, StarbleachedPearlEntity::new).dimensions(new EntityDimensions(0.25F, 0.25F, true)).trackRangeChunks(4).trackedUpdateRate(10).build()
+            FabricEntityTypeBuilder.<StarbleachedPearlEntity>create(SpawnGroup.MISC, StarbleachedPearlEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build()
     );
 
     public static final EntityType<FirmamentRejuvenatorEntity> FIRMAMENT_REJUVENATOR = Registry.register(
             Registries.ENTITY_TYPE,
             OperationStarcleave.id("firmament_rejuvenator"),
-            FabricEntityTypeBuilder.<FirmamentRejuvenatorEntity>create(SpawnGroup.MISC, FirmamentRejuvenatorEntity::new).dimensions(new EntityDimensions(0.25F, 0.25F, true)).trackRangeChunks(4).trackedUpdateRate(10).build()
+            FabricEntityTypeBuilder.<FirmamentRejuvenatorEntity>create(SpawnGroup.MISC, FirmamentRejuvenatorEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build()
     );
 
     public static void init() {

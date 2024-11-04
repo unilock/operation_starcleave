@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.BedPart;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -23,12 +24,18 @@ import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import phanastrae.operation_starcleave.block.OperationStarcleaveBlocks;
 import phanastrae.operation_starcleave.item.OperationStarcleaveItems;
 
+import java.util.concurrent.CompletableFuture;
+
 public class BlockLootTableProvider extends FabricBlockLootTableProvider {
-    protected BlockLootTableProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    private final RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+
+    protected BlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
@@ -65,7 +72,7 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider {
         addRandomDrop(OperationStarcleaveBlocks.SHORT_HOLY_MOSS,
                 conditionalDrop(
                         item(OperationStarcleaveItems.SHORT_HOLY_MOSS),
-                        item(OperationStarcleaveItems.HOLY_STRANDS).apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE, 4)).apply(ExplosionDecayLootFunction.builder()).conditionally(RandomChanceLootCondition.builder(0.3F)),
+                        item(OperationStarcleaveItems.HOLY_STRANDS).apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 4)).apply(ExplosionDecayLootFunction.builder()).conditionally(RandomChanceLootCondition.builder(0.3F)),
                         WITH_SHEARS
         ));
 
@@ -82,18 +89,18 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider {
     }
 
     public void addRandomDrop(Block block, LootTable.Builder builder) {
-        addDrop(block, builder.randomSequenceId(block.getLootTableId()));
+        addDrop(block, builder.randomSequenceId(block.getLootTableKey().getValue()));
     }
 
-    public static LeafEntry.Builder<?> item(ItemConvertible itemConvertible) {
+    public LeafEntry.Builder<?> item(ItemConvertible itemConvertible) {
         return ItemEntry.builder(itemConvertible);
     }
 
-    public static LeafEntry.Builder<?> item(ItemConvertible itemConvertible, float min, float max, boolean add) {
+    public LeafEntry.Builder<?> item(ItemConvertible itemConvertible, float min, float max, boolean add) {
         return item(itemConvertible).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(min, max), add));
     }
 
-    public static LootTable.Builder conditionalDrop(LootPoolEntry.Builder<?> withCondition, LootPoolEntry.Builder<?> noCondition, LootCondition.Builder condition) {
+    public LootTable.Builder conditionalDrop(LootPoolEntry.Builder<?> withCondition, LootPoolEntry.Builder<?> noCondition, LootCondition.Builder condition) {
         LootPoolEntry.Builder<?> noConditionEntry = noCondition.conditionally(SurvivesExplosionLootCondition.builder());
         LootPoolEntry.Builder<?> withConditionEntry = withCondition.conditionally(condition);
 
@@ -103,11 +110,11 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider {
         );
     }
 
-    public static LootTable.Builder silkTouchDrop(LootPoolEntry.Builder<?> withSilkTouch, LootPoolEntry.Builder<?> noSilkTouch) {
-        return conditionalDrop(withSilkTouch, noSilkTouch, WITH_SILK_TOUCH);
+    public LootTable.Builder silkTouchDrop(LootPoolEntry.Builder<?> withSilkTouch, LootPoolEntry.Builder<?> noSilkTouch) {
+        return conditionalDrop(withSilkTouch, noSilkTouch, createSilkTouchCondition());
     }
 
-    public static LootTable.Builder silkTouchDrop(ItemConvertible withSilkTouch, ItemConvertible noSilkTouch) {
+    public LootTable.Builder silkTouchDrop(ItemConvertible withSilkTouch, ItemConvertible noSilkTouch) {
         return silkTouchDrop(item(withSilkTouch), item(noSilkTouch));
     }
 }

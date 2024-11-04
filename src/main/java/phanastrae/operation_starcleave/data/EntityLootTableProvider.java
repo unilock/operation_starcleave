@@ -8,19 +8,22 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.util.Identifier;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import phanastrae.operation_starcleave.OperationStarcleave;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class EntityLootTableProvider extends SimpleFabricLootTableProvider {
-    public EntityLootTableProvider(FabricDataOutput output) {
-        super(output, LootContextTypes.ENTITY);
+    public EntityLootTableProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(output, registryLookup, LootContextTypes.ENTITY);
     }
 
     @Override
-    public void accept(BiConsumer<Identifier, LootTable.Builder> exporter) {
-        exporter.accept(OperationStarcleave.id("entities/starcleaver_golem"), LootTable.builder()
+    public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> exporter) {
+        exporter.accept(RegistryKey.of(RegistryKeys.LOOT_TABLE, OperationStarcleave.id("entities/starcleaver_golem")), LootTable.builder()
                 .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(Items.GOLD_NUGGET))));
     }

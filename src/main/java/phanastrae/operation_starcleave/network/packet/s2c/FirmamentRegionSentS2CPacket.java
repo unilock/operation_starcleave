@@ -1,29 +1,17 @@
 package phanastrae.operation_starcleave.network.packet.s2c;
 
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.packet.CustomPayload;
+import phanastrae.operation_starcleave.OperationStarcleave;
 
-public class FirmamentRegionSentS2CPacket implements FabricPacket {
-
-    public final int batchSize;
-
-    public FirmamentRegionSentS2CPacket(int batchSize) {
-        this.batchSize = batchSize;
-    }
-
-    public FirmamentRegionSentS2CPacket(PacketByteBuf packetByteBuf) {
-        this.batchSize = packetByteBuf.readInt();
-    }
+public record FirmamentRegionSentS2CPacket(int batchSize) implements CustomPayload {
+    public static final Id<FirmamentRegionSentS2CPacket> ID = new Id<>(OperationStarcleave.id("firmament_region_sent_s2c"));
+    public static final PacketCodec<RegistryByteBuf, FirmamentRegionSentS2CPacket> PACKET_CODEC = PacketCodecs.INTEGER.xmap(FirmamentRegionSentS2CPacket::new, FirmamentRegionSentS2CPacket::batchSize).cast();
 
     @Override
-    public void write(PacketByteBuf buf) {
-        buf.writeInt(this.batchSize);
-    }
-
-    @Override
-    public PacketType<?> getType() {
-        return OperationStarcleavePacketTypes.FIRMAMENT_REGION_SENT_S2C;
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

@@ -1,6 +1,5 @@
 package phanastrae.operation_starcleave.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -15,43 +14,43 @@ import phanastrae.operation_starcleave.entity.OperationStarcleaveEntityTypes;
 
 public class OperationStarcleaveItems {
 
-    public static final Item NETHERITE_PUMPKIN = new NetheritePumpkinItem(OperationStarcleaveBlocks.NETHERITE_PUMPKIN, new FabricItemSettings().rarity(Rarity.UNCOMMON).fireproof());
+    public static final Item NETHERITE_PUMPKIN = new NetheritePumpkinItem(OperationStarcleaveBlocks.NETHERITE_PUMPKIN, new Item.Settings().rarity(Rarity.UNCOMMON).fireproof());
 
-    public static final Item STELLAR_SEDIMENT = new BlockItem(OperationStarcleaveBlocks.STELLAR_SEDIMENT, new FabricItemSettings());
-    public static final Item STELLAR_FARMLAND = new BlockItem(OperationStarcleaveBlocks.STELLAR_FARMLAND, new FabricItemSettings());
-    public static final Item HOLY_MOSS = new BlockItem(OperationStarcleaveBlocks.HOLY_MOSS, new FabricItemSettings());
-    public static final Item SHORT_HOLY_MOSS = new BlockItem(OperationStarcleaveBlocks.SHORT_HOLY_MOSS, new FabricItemSettings());
-    public static final Item STARDUST_BLOCK = new BlockItem(OperationStarcleaveBlocks.STARDUST_BLOCK, new FabricItemSettings());
-    public static final Item STARDUST_CLUSTER = new BlockItem(OperationStarcleaveBlocks.STARDUST_CLUSTER, new FabricItemSettings());
-    public static final Item STARBLEACHED_LOG = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_LOG, new FabricItemSettings());
-    public static final Item STARBLEACHED_WOOD = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_WOOD, new FabricItemSettings());
-    public static final Item STARBLEACHED_LEAVES = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_LEAVES, new FabricItemSettings());
-    public static final Item STARBLEACHED_TILES = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILES, new FabricItemSettings());
-    public static final Item STARBLEACHED_TILE_STAIRS = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILE_STAIRS, new FabricItemSettings());
-    public static final Item STARBLEACHED_TILE_SLAB = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILE_SLAB, new FabricItemSettings());
-    public static final Item STARBLEACHED_TILE_WALL = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILE_WALL, new FabricItemSettings());
-    public static final Item CHISELED_STARBLEACHED_TILES = new BlockItem(OperationStarcleaveBlocks.CHISELED_STARBLEACHED_TILES, new FabricItemSettings());
-    public static final Item IMBUED_STARBLEACHED_TILES = new BlockItem(OperationStarcleaveBlocks.IMBUED_STARBLEACHED_TILES, new FabricItemSettings());
-    public static final Item STARBLEACHED_PEARL_BLOCK = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_PEARL_BLOCK, new FabricItemSettings());
-    public static final Item STELLAR_TILES = new BlockItem(OperationStarcleaveBlocks.STELLAR_TILES, new FabricItemSettings());
-    public static final Item STELLAR_TILE_SLAB = new BlockItem(OperationStarcleaveBlocks.STELLAR_TILE_SLAB, new FabricItemSettings());
-    public static final Item STELLAR_REPULSOR = new BlockItem(OperationStarcleaveBlocks.STELLAR_REPULSOR, new FabricItemSettings());
-    public static final Item BLESSED_CLOTH_BLOCK = new BlockItem(OperationStarcleaveBlocks.BLESSED_CLOTH_BLOCK, new FabricItemSettings());
-    public static final Item BLESSED_CLOTH_CARPET = new BlockItem(OperationStarcleaveBlocks.BLESSED_CLOTH_CARPET, new FabricItemSettings());
-    public static final Item BLESSED_CLOTH_CURTAIN = new BlockItem(OperationStarcleaveBlocks.BLESSED_CLOTH_CURTAIN, new FabricItemSettings());
+    public static final Item STELLAR_SEDIMENT = new BlockItem(OperationStarcleaveBlocks.STELLAR_SEDIMENT, new Item.Settings());
+    public static final Item STELLAR_FARMLAND = new BlockItem(OperationStarcleaveBlocks.STELLAR_FARMLAND, new Item.Settings());
+    public static final Item HOLY_MOSS = new BlockItem(OperationStarcleaveBlocks.HOLY_MOSS, new Item.Settings());
+    public static final Item SHORT_HOLY_MOSS = new BlockItem(OperationStarcleaveBlocks.SHORT_HOLY_MOSS, new Item.Settings());
+    public static final Item STARDUST_BLOCK = new BlockItem(OperationStarcleaveBlocks.STARDUST_BLOCK, new Item.Settings());
+    public static final Item STARDUST_CLUSTER = new BlockItem(OperationStarcleaveBlocks.STARDUST_CLUSTER, new Item.Settings());
+    public static final Item STARBLEACHED_LOG = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_LOG, new Item.Settings());
+    public static final Item STARBLEACHED_WOOD = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_WOOD, new Item.Settings());
+    public static final Item STARBLEACHED_LEAVES = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_LEAVES, new Item.Settings());
+    public static final Item STARBLEACHED_TILES = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILES, new Item.Settings());
+    public static final Item STARBLEACHED_TILE_STAIRS = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILE_STAIRS, new Item.Settings());
+    public static final Item STARBLEACHED_TILE_SLAB = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILE_SLAB, new Item.Settings());
+    public static final Item STARBLEACHED_TILE_WALL = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_TILE_WALL, new Item.Settings());
+    public static final Item CHISELED_STARBLEACHED_TILES = new BlockItem(OperationStarcleaveBlocks.CHISELED_STARBLEACHED_TILES, new Item.Settings());
+    public static final Item IMBUED_STARBLEACHED_TILES = new BlockItem(OperationStarcleaveBlocks.IMBUED_STARBLEACHED_TILES, new Item.Settings());
+    public static final Item STARBLEACHED_PEARL_BLOCK = new BlockItem(OperationStarcleaveBlocks.STARBLEACHED_PEARL_BLOCK, new Item.Settings());
+    public static final Item STELLAR_TILES = new BlockItem(OperationStarcleaveBlocks.STELLAR_TILES, new Item.Settings());
+    public static final Item STELLAR_TILE_SLAB = new BlockItem(OperationStarcleaveBlocks.STELLAR_TILE_SLAB, new Item.Settings());
+    public static final Item STELLAR_REPULSOR = new BlockItem(OperationStarcleaveBlocks.STELLAR_REPULSOR, new Item.Settings());
+    public static final Item BLESSED_CLOTH_BLOCK = new BlockItem(OperationStarcleaveBlocks.BLESSED_CLOTH_BLOCK, new Item.Settings());
+    public static final Item BLESSED_CLOTH_CARPET = new BlockItem(OperationStarcleaveBlocks.BLESSED_CLOTH_CARPET, new Item.Settings());
+    public static final Item BLESSED_CLOTH_CURTAIN = new BlockItem(OperationStarcleaveBlocks.BLESSED_CLOTH_CURTAIN, new Item.Settings());
 
-    public static final Item BLESSED_BED = new BedItem(OperationStarcleaveBlocks.BLESSED_BED, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+    public static final Item BLESSED_BED = new BedItem(OperationStarcleaveBlocks.BLESSED_BED, new Item.Settings().maxCount(1).rarity(Rarity.RARE));
 
-    public static final Item STARCLEAVER_GOLEM_BUCKET = new StarcleaverGolemBucketItem(new FabricItemSettings().maxCount(1));
+    public static final Item STARCLEAVER_GOLEM_BUCKET = new StarcleaverGolemBucketItem(new Item.Settings().maxCount(1));
     public static final Item STARCLEAVER_GOLEM_SPAWN_EGG = new SpawnEggItem(OperationStarcleaveEntityTypes.STARCLEAVER_GOLEM, 0x292725, 0x61eddf, new Item.Settings());
-    public static final Item STARBLEACH_BOTTLE = new StarbleachBottleItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(StarbleachBottleItem.STARBLEACH_BOTTLE).maxCount(16));
-    public static final Item SPLASH_STARBLEACH_BOTTLE = new SplashStarbleachBottleItem(new FabricItemSettings().maxCount(16));
-    public static final Item STARBLEACHED_PEARL = new StarbleachedPearlItem(new FabricItemSettings().maxCount(16));
-    public static final Item STARFRUIT = new StarfruitItem(new FabricItemSettings().food(StarfruitItem.STARFRUIT));
-    public static final Item HOLY_STRANDS = new Item(new FabricItemSettings());
-    public static final Item BLESSED_CLOTH = new Item(new FabricItemSettings());
-    public static final Item FIRMAMENT_REJUVENATOR = new FirmamentRejuvenatorItem(new FabricItemSettings().rarity(Rarity.RARE).maxCount(8));
-    public static final Item FIRMAMENT_MANIPULATOR = new FirmamentManipulatorItem(new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1));
+    public static final Item STARBLEACH_BOTTLE = new StarbleachBottleItem(new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(StarbleachBottleItem.STARBLEACH_BOTTLE).maxCount(16));
+    public static final Item SPLASH_STARBLEACH_BOTTLE = new SplashStarbleachBottleItem(new Item.Settings().maxCount(16));
+    public static final Item STARBLEACHED_PEARL = new StarbleachedPearlItem(new Item.Settings().maxCount(16));
+    public static final Item STARFRUIT = new StarfruitItem(new Item.Settings().food(StarfruitItem.STARFRUIT));
+    public static final Item HOLY_STRANDS = new Item(new Item.Settings());
+    public static final Item BLESSED_CLOTH = new Item(new Item.Settings());
+    public static final Item FIRMAMENT_REJUVENATOR = new FirmamentRejuvenatorItem(new Item.Settings().rarity(Rarity.RARE).maxCount(8));
+    public static final Item FIRMAMENT_MANIPULATOR = new FirmamentManipulatorItem(new Item.Settings().rarity(Rarity.EPIC).maxCount(1));
 
     public static final ItemGroup OPERATION_STARCLEAVE_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(NETHERITE_PUMPKIN))

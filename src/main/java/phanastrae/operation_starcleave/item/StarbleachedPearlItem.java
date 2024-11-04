@@ -1,18 +1,24 @@
 package phanastrae.operation_starcleave.item;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ProjectileItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 import phanastrae.operation_starcleave.entity.projectile.StarbleachedPearlEntity;
 
-public class StarbleachedPearlItem extends Item {
-    public StarbleachedPearlItem(Settings settings) {
+public class StarbleachedPearlItem extends Item implements ProjectileItem {
+    private static final ProjectileItem.Settings PROJECTILE_SETTINGS = ProjectileItem.Settings.builder().power(ProjectileItem.Settings.DEFAULT.power() * 1.5F).build();
+
+    public StarbleachedPearlItem(Item.Settings settings) {
         super(settings);
     }
 
@@ -38,10 +44,20 @@ public class StarbleachedPearlItem extends Item {
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
-        if (!user.getAbilities().creativeMode) {
-            itemStack.decrement(1);
-        }
+        itemStack.decrementUnlessCreative(1, user);
 
         return TypedActionResult.success(itemStack, world.isClient());
+    }
+
+    @Override
+    public ProjectileItem.Settings getProjectileSettings() {
+        return PROJECTILE_SETTINGS;
+    }
+
+    @Override
+    public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
+        StarbleachedPearlEntity starbleachedPearlEntity = new StarbleachedPearlEntity(world, pos.getX(), pos.getY(), pos.getZ());
+        starbleachedPearlEntity.setItem(stack);
+        return starbleachedPearlEntity;
     }
 }

@@ -17,8 +17,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -76,7 +76,7 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         if(StarbleachCoating.canAddStarbleach(itemStack)) {
             if (!world.isClient) {
@@ -91,9 +91,9 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
                 world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW, SoundCategory.BLOCKS, 1.0F, 1.5F);
                 world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         } else {
-            return super.onUse(state, world, pos, player, hand, hit);
+            return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
         }
     }
 
@@ -109,7 +109,7 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
                 world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
             }
 
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
         StarbleachCauldronBlock.STARBLEACH_CAULDRON_BEHAVIOR.map().put(OperationStarcleaveItems.STARBLEACH_BOTTLE, (state, world, pos, player, hand, stack) -> {
@@ -123,9 +123,9 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
                     world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
                 }
 
-                return ActionResult.success(world.isClient);
+                return ItemActionResult.success(world.isClient);
             } else {
-                return ActionResult.PASS;
+                return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
         });
 
@@ -140,7 +140,7 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
                 world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
             }
 
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
         StarbleachCauldronBlock.STARBLEACH_CAULDRON_BEHAVIOR.map().put(Items.ENDER_PEARL, (state, world, pos, player, hand, stack) -> {
@@ -154,7 +154,7 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
                 world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
             }
 
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
         StarbleachCauldronBlock.STARBLEACH_CAULDRON_BEHAVIOR.map().put(Items.CHORUS_FRUIT, (state, world, pos, player, hand, stack) -> {
@@ -168,7 +168,7 @@ public class StarbleachCauldronBlock extends AbstractCauldronBlock {
                 world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
             }
 
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
     }
 }

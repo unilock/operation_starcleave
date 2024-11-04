@@ -1,27 +1,17 @@
 package phanastrae.operation_starcleave.network.packet.s2c;
 
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.packet.CustomPayload;
+import phanastrae.operation_starcleave.OperationStarcleave;
 
-public class UnloadFirmamentRegionS2CPacket implements FabricPacket {
-
-    public final long regionId;
-    public UnloadFirmamentRegionS2CPacket(long id) {
-        this.regionId = id;
-    }
-
-    public UnloadFirmamentRegionS2CPacket(PacketByteBuf buf) {
-        this.regionId = buf.readLong();
-    }
-    @Override
-    public void write(PacketByteBuf buf) {
-        buf.writeLong(this.regionId);
-    }
+public record UnloadFirmamentRegionS2CPacket(long id) implements CustomPayload {
+    public static final Id<UnloadFirmamentRegionS2CPacket> ID = new Id<>(OperationStarcleave.id("unload_firmament_region_s2c"));
+    public static final PacketCodec<RegistryByteBuf, UnloadFirmamentRegionS2CPacket> PACKET_CODEC = PacketCodecs.VAR_LONG.xmap(UnloadFirmamentRegionS2CPacket::new, UnloadFirmamentRegionS2CPacket::id).cast();
 
     @Override
-    public PacketType<?> getType() {
-        return OperationStarcleavePacketTypes.UNLOAD_FIRMAMENT_REGION_S2C;
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

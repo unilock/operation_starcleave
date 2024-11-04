@@ -1,7 +1,7 @@
 package phanastrae.operation_starcleave.item;
 
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -57,9 +57,9 @@ public class StarfruitItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 12;
     }
 
-    public static final FoodComponent STARFRUIT = new FoodComponent.Builder().hunger(2).saturationModifier(0.5F).alwaysEdible().snack().build();
+    public static final FoodComponent STARFRUIT = new FoodComponent.Builder().nutrition(2).saturationModifier(0.5F).alwaysEdible().snack().build();
 }

@@ -1,29 +1,17 @@
 package phanastrae.operation_starcleave.network.packet.c2s;
 
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.packet.CustomPayload;
+import phanastrae.operation_starcleave.OperationStarcleave;
 
-public class AcknowledgeFirmamentRegionDataC2SPacket implements FabricPacket {
-
-    public final float desiredChunksPerTick;
-
-    public AcknowledgeFirmamentRegionDataC2SPacket(float desiredChunksPerTick) {
-        this.desiredChunksPerTick = desiredChunksPerTick;
-    }
-
-    public AcknowledgeFirmamentRegionDataC2SPacket(PacketByteBuf packetByteBuf) {
-        this.desiredChunksPerTick = packetByteBuf.readFloat();
-    }
+public record AcknowledgeFirmamentRegionDataC2SPacket(float desiredChunksPerTick) implements CustomPayload {
+    public static final Id<AcknowledgeFirmamentRegionDataC2SPacket> ID = new Id<>(OperationStarcleave.id("start_firmament_region_send_s2c"));
+    public static final PacketCodec<RegistryByteBuf, AcknowledgeFirmamentRegionDataC2SPacket> PACKET_CODEC = PacketCodecs.FLOAT.xmap(AcknowledgeFirmamentRegionDataC2SPacket::new, AcknowledgeFirmamentRegionDataC2SPacket::desiredChunksPerTick).cast();
 
     @Override
-    public void write(PacketByteBuf buf) {
-        buf.writeFloat(this.desiredChunksPerTick);
-    }
-
-    @Override
-    public PacketType<?> getType() {
-        return OperationStarcleavePacketTypes.ACKNOWLEDGE_FIRMAMENT_REGION_DATA_C2S;
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

@@ -2,6 +2,8 @@ package phanastrae.operation_starcleave.entity.mob;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -74,7 +76,6 @@ public class StarcleaverGolemEntity extends GolemEntity implements Bucketable {
 
     public StarcleaverGolemEntity(EntityType<? extends GolemEntity> entityType, World world) {
         super(entityType, world);
-        this.setStepHeight(1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.setPathfindingPenalty(PathNodeType.LAVA, 0.0F);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 0.0F);
@@ -99,16 +100,17 @@ public class StarcleaverGolemEntity extends GolemEntity implements Bucketable {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0)
                 .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 3.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(IGNITED, false);
-        this.dataTracker.startTracking(PLUMMETING, false);
-        this.dataTracker.startTracking(GUNPOWDER_TICKS, 0);
-        this.dataTracker.startTracking(FAVORITE_UUID, Optional.empty());
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(IGNITED, false);
+        builder.add(PLUMMETING, false);
+        builder.add(GUNPOWDER_TICKS, 0);
+        builder.add(FAVORITE_UUID, Optional.empty());
     }
 
     @Override
@@ -374,9 +376,7 @@ public class StarcleaverGolemEntity extends GolemEntity implements Bucketable {
             } else {
                 float g = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
                 this.playSound(this.getAmbientSound(), 1.0F, g);
-                if (!player.getAbilities().creativeMode) {
-                    itemStack.decrement(1);
-                }
+                itemStack.decrementUnlessCreative(1, player);
 
                 this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_POSITIVE_PLAYER_REACTION_PARTICLES);
                 sendOpenDoor();
@@ -390,9 +390,7 @@ public class StarcleaverGolemEntity extends GolemEntity implements Bucketable {
             if (!world.isClient) {
                 this.setGunpowderTicks(this.getGunpowderTicks() + 60);
             }
-            if (!player.getAbilities().creativeMode) {
-                itemStack.decrement(1);
-            }
+            itemStack.decrementUnlessCreative(1, player);
 
             sendOpenDoor();
             return ActionResult.success(this.getWorld().isClient);
@@ -406,7 +404,7 @@ public class StarcleaverGolemEntity extends GolemEntity implements Bucketable {
                 if (!itemStack.isDamageable()) {
                     itemStack.decrement(1);
                 } else {
-                    itemStack.damage(1, player, playerx -> playerx.sendToolBreakStatus(hand));
+                    itemStack.damage(1, player, hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                 }
 
                 if(player instanceof ServerPlayerEntity serverPlayerEntity) {
@@ -553,11 +551,12 @@ public class StarcleaverGolemEntity extends GolemEntity implements Bucketable {
     @Override
     public void copyDataToStack(ItemStack stack) {
         Bucketable.copyDataToStack(this, stack);
-        NbtCompound nbtCompound = stack.getOrCreateNbt();
-        nbtCompound.putInt("GunpowderTicks", this.getGunpowderTicks());
-        if (this.getFavoriteUuid() != null) {
-            nbtCompound.putUuid("Favorite", this.getFavoriteUuid());
-        }
+        NbtComponent.set(DataComponentTypes.BUCKET_ENTITY_DATA, stack, nbtCompound -> {
+            nbtCompound.putInt("GunpowderTicks", this.getGunpowderTicks());
+            if (this.getFavoriteUuid() != null) {
+                nbtCompound.putUuid("Favorite", this.getFavoriteUuid());
+            }
+        });
     }
 
     @Override

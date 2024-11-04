@@ -1,34 +1,31 @@
 package phanastrae.operation_starcleave.network.packet.s2c;
 
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
+import phanastrae.operation_starcleave.OperationStarcleave;
 import phanastrae.operation_starcleave.world.firmament.FirmamentSubRegionData;
 
-public class UpdateFirmamentSubRegionS2CPacket implements FabricPacket {
+public record UpdateFirmamentSubRegionS2CPacket(long id, FirmamentSubRegionData subRegionData) implements CustomPayload {
+    public static final Id<UpdateFirmamentSubRegionS2CPacket> ID = new Id<>(OperationStarcleave.id("update_firmament_subregion_s2c"));
+    public static final PacketCodec<RegistryByteBuf, UpdateFirmamentSubRegionS2CPacket> PACKET_CODEC = new PacketCodec<>() {
+        @Override
+        public UpdateFirmamentSubRegionS2CPacket decode(RegistryByteBuf buf) {
+            return new UpdateFirmamentSubRegionS2CPacket(
+                    buf.readLong(),
+                    new FirmamentSubRegionData(buf)
+            );
+        }
 
-    public final long id;
-    public final FirmamentSubRegionData subRegionData;
-
-    public UpdateFirmamentSubRegionS2CPacket(long id, FirmamentSubRegionData data) {
-        this.id = id;
-        this.subRegionData = data;
-    }
-
-    public UpdateFirmamentSubRegionS2CPacket(PacketByteBuf buf) {
-        this.id = buf.readLong();
-        this.subRegionData = new FirmamentSubRegionData(buf);
-    }
-
-    @Override
-    public void write(PacketByteBuf buf) {
-        buf.writeLong(this.id);
-        this.subRegionData.write(buf);
-    }
+        @Override
+        public void encode(RegistryByteBuf buf, UpdateFirmamentSubRegionS2CPacket value) {
+            buf.writeLong(value.id);
+            value.subRegionData.write(buf);
+        }
+    };
 
     @Override
-    public PacketType<?> getType() {
-        return OperationStarcleavePacketTypes.UPDATE_FIRMAMENT_SUB_REGION_S2C;
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

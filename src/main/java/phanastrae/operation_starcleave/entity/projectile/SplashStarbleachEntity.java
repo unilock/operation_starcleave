@@ -73,8 +73,8 @@ public class SplashStarbleachEntity extends ThrownItemEntity implements FlyingIt
     }
 
     @Override
-    protected float getGravity() {
-        return 0.05F;
+    protected double getGravity() {
+        return 0.05D;
     }
 
     @Override

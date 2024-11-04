@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "phanastrae.operation_starcleave.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AttachedStemBlockMixin",
     "CropBlockMixin",
@@ -12,12 +12,12 @@
     "MinecraftServerMixin",
     "PitcherCropBlockMixin",
     "PlantBlockMixin",
+    "ServerChunkLoadingManagerMixin",
     "ServerChunkManagerMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin",
     "ServerWorldMixin",
     "StemBlockMixin",
-    "ThreadedAnvilChunkStorageMixin",
     "WorldMixin"
   ],
   "injectors": {

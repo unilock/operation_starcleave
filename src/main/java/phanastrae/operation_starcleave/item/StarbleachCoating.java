@@ -1,19 +1,16 @@
 package phanastrae.operation_starcleave.item;
 
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import phanastrae.operation_starcleave.entity.effect.OperationStarcleaveStatusEffects;
 
 public class StarbleachCoating {
-    public static final String KEY = "operation_starcleave_Starbleached";
-
     public static void onEat(LivingEntity livingEntity, World world, ItemStack itemStack) {
         if(world.isClient) {
             return;
@@ -25,30 +22,19 @@ public class StarbleachCoating {
     }
 
     public static boolean hasStarbleachCoating(ItemStack itemStack) {
-        NbtCompound nbt = itemStack.getNbt();
-        if(nbt == null || nbt.isEmpty()) return false;
-
-        if(nbt.contains(KEY, NbtElement.BYTE_TYPE)) {
-            return nbt.getBoolean(KEY);
-        } else {
-            return false;
-        }
+        return itemStack.getOrDefault(OperationStarcleaveComponents.STARBLEACHED, false);
     }
 
     public static void addStarbleach(ItemStack itemStack) {
-        itemStack.getOrCreateNbt().putBoolean(KEY, true);
+        itemStack.set(OperationStarcleaveComponents.STARBLEACHED, true);
     }
 
     public static boolean canAddStarbleach(ItemStack itemStack) {
-        if(!itemStack.isFood()) {
+        if(!itemStack.contains(DataComponentTypes.FOOD)) {
             return false;
         }
 
-        boolean hasStarbleach = false;
-        NbtCompound nbt = itemStack.getNbt();
-        if(nbt != null && !nbt.isEmpty() && nbt.contains(KEY, NbtElement.BYTE_TYPE)) {
-            hasStarbleach = nbt.getBoolean(KEY);
-        }
+        boolean hasStarbleach = itemStack.getOrDefault(OperationStarcleaveComponents.STARBLEACHED, false);
         if(hasStarbleach) {
             return false;
         }

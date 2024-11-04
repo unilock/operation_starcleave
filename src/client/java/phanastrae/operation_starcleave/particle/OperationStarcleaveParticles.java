@@ -5,7 +5,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.particle.WaterSuspendParticle;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.MathHelper;
 
 public class OperationStarcleaveParticles {
@@ -21,7 +21,7 @@ public class OperationStarcleaveParticles {
             super(spriteProvider);
         }
 
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+        public Particle createParticle(SimpleParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
             Particle particle = super.createParticle(defaultParticleType, clientWorld, d, e, f, g, h, i);
             if(particle != null) {
                 float fl = clientWorld.random.nextFloat();

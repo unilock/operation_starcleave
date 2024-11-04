@@ -1,32 +1,30 @@
 package phanastrae.operation_starcleave.network.packet.s2c;
 
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
+import phanastrae.operation_starcleave.OperationStarcleave;
 
-public class FirmamentCleavedS2CPacket implements FabricPacket {
+public record FirmamentCleavedS2CPacket(int x, int z) implements CustomPayload {
+    public static final Id<FirmamentCleavedS2CPacket> ID = new Id<>(OperationStarcleave.id("firmament_cleaved_s2c"));
+    public static final PacketCodec<RegistryByteBuf, FirmamentCleavedS2CPacket> PACKET_CODEC = new PacketCodec<>() {
+        @Override
+        public FirmamentCleavedS2CPacket decode(RegistryByteBuf buf) {
+            return new FirmamentCleavedS2CPacket(
+                    buf.readInt(),
+                    buf.readInt()
+            );
+        }
 
-    public final int x;
-    public final int z;
-    public FirmamentCleavedS2CPacket(int x, int z) {
-        this.x = x;
-        this.z = z;
-    }
-
-    public FirmamentCleavedS2CPacket(PacketByteBuf buf) {
-        this.x = buf.readInt();
-        this.z = buf.readInt();
-    }
-
-    @Override
-    public void write(PacketByteBuf buf) {
-        buf.writeInt(this.x);
-        buf.writeInt(this.z);
-    }
+        @Override
+        public void encode(RegistryByteBuf buf, FirmamentCleavedS2CPacket value) {
+            buf.writeInt(value.x);
+            buf.writeInt(value.z);
+        }
+    };
 
     @Override
-    public PacketType<?> getType() {
-        return OperationStarcleavePacketTypes.FIRMAMENT_CLEAVED_S2C;
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

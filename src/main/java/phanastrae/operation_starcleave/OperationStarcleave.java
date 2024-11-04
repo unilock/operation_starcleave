@@ -29,7 +29,7 @@ public class OperationStarcleave implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("operation_starcleave");
 
     public static Identifier id(String path) {
-    	return new Identifier("operation_starcleave", path);
+    	return Identifier.of("operation_starcleave", path);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package phanastrae.operation_starcleave.block;
 
 import net.minecraft.block.*;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -23,29 +23,29 @@ public class OperationStarcleaveBlocks {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
-    public static final Block STELLAR_SEDIMENT = new Block(AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).instrument(Instrument.BASEDRUM).strength(1.15f, 2f).sounds(BlockSoundGroup.SAND).luminance(b -> 2).allowsSpawning(Blocks::never));
-    public static final Block STELLAR_FARMLAND = new StellarFarmlandBlock(AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).instrument(Instrument.BASEDRUM).strength(1.25f, 2f).sounds(BlockSoundGroup.SAND).luminance(b -> b.get(FarmlandBlock.MOISTURE) == 7 ? 15 : 2).allowsSpawning(Blocks::never).blockVision(Blocks::always).suffocates(Blocks::always).ticksRandomly());
-    public static final Block HOLY_MOSS = new HolyMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.BASEDRUM).strength(1.15f, 2f).sounds(BlockSoundGroup.MOSS_BLOCK).luminance(b -> 13).allowsSpawning(Blocks::never).ticksRandomly());
+    public static final Block STELLAR_SEDIMENT = new Block(AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.15f, 2f).sounds(BlockSoundGroup.SAND).luminance(b -> 2).allowsSpawning(Blocks::never));
+    public static final Block STELLAR_FARMLAND = new StellarFarmlandBlock(AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.25f, 2f).sounds(BlockSoundGroup.SAND).luminance(b -> b.get(FarmlandBlock.MOISTURE) == 7 ? 15 : 2).allowsSpawning(Blocks::never).blockVision(Blocks::always).suffocates(Blocks::always).ticksRandomly());
+    public static final Block HOLY_MOSS = new HolyMossBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.BASEDRUM).strength(1.15f, 2f).sounds(BlockSoundGroup.MOSS_BLOCK).luminance(b -> 13).allowsSpawning(Blocks::never).ticksRandomly());
     public static final Block SHORT_HOLY_MOSS = new ShortHolyMossBlock(AbstractBlock.Settings.create().replaceable().noCollision().breakInstantly().mapColor(MapColor.PALE_YELLOW).sounds(BlockSoundGroup.MOSS_BLOCK).luminance(b -> 13).offset(AbstractBlock.OffsetType.XYZ).pistonBehavior(PistonBehavior.DESTROY));
-    public static final Block STARDUST_BLOCK = new ColoredFallingBlock(new ColorCode(0xEF9FCFFF), AbstractBlock.Settings.create().mapColor(MapColor.PALE_PURPLE).instrument(Instrument.BASEDRUM).strength(0.2f, 0.1f).sounds(BlockSoundGroup.SAND).luminance(b -> 9).allowsSpawning(Blocks::never));
+    public static final Block STARDUST_BLOCK = new ColoredFallingBlock(new ColorCode(0xEF9FCFFF), AbstractBlock.Settings.create().mapColor(MapColor.PALE_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2f, 0.1f).sounds(BlockSoundGroup.SAND).luminance(b -> 9).allowsSpawning(Blocks::never));
     public static final Block STARDUST_CLUSTER = new StardustClusterBlock(AbstractBlock.Settings.create().replaceable().breakInstantly().dropsNothing().nonOpaque().luminance(b -> 15));
-    public static final Block STARBLEACHED_LOG = new PillarBlock(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(2f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
-    public static final Block STARBLEACHED_WOOD = new PillarBlock(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(2f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
-    public static final Block STARBLEACHED_LEAVES = new StarbleachedLeavesBlock(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(0.25f, 2f).sounds(BlockSoundGroup.STONE).luminance(b -> 11).allowsSpawning(Blocks::never).nonOpaque().suffocates(Blocks::never).blockVision(Blocks::never).solidBlock(Blocks::never));
-    public static final Block STARBLEACHED_TILES = new Block(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
+    public static final Block STARBLEACHED_LOG = new PillarBlock(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
+    public static final Block STARBLEACHED_WOOD = new PillarBlock(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(2f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
+    public static final Block STARBLEACHED_LEAVES = new StarbleachedLeavesBlock(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(0.25f, 2f).sounds(BlockSoundGroup.STONE).luminance(b -> 11).allowsSpawning(Blocks::never).nonOpaque().suffocates(Blocks::never).blockVision(Blocks::never).solidBlock(Blocks::never));
+    public static final Block STARBLEACHED_TILES = new Block(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
     public static final Block STARBLEACHED_TILE_STAIRS = new StairsBlock(STARBLEACHED_TILES.getDefaultState(), AbstractBlock.Settings.copyShallow(STARBLEACHED_TILES));
     public static final Block STARBLEACHED_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copyShallow(STARBLEACHED_TILES));
     public static final Block STARBLEACHED_TILE_WALL = new WallBlock(AbstractBlock.Settings.copyShallow(STARBLEACHED_TILES).solid());
-    public static final Block CHISELED_STARBLEACHED_TILES = new Block(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
-    public static final Block IMBUED_STARBLEACHED_TILES = new ImbuedStarbleachedTilesBlock(AbstractBlock.Settings.create().mapColor(MapColor.CYAN).instrument(Instrument.BASEDRUM).requiresTool().strength(1.25f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 15).allowsSpawning(Blocks::never));
-    public static final Block STARBLEACHED_PEARL_BLOCK = new StarbleachedPearlBlock(AbstractBlock.Settings.create().mapColor(MapColor.CYAN).instrument(Instrument.BASEDRUM).requiresTool().strength(1.3f, 6f).sounds(BlockSoundGroup.GLASS).luminance(b -> 12).allowsSpawning(Blocks::never));
+    public static final Block CHISELED_STARBLEACHED_TILES = new Block(AbstractBlock.Settings.create().mapColor(MapColor.GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 8).allowsSpawning(Blocks::never));
+    public static final Block IMBUED_STARBLEACHED_TILES = new ImbuedStarbleachedTilesBlock(AbstractBlock.Settings.create().mapColor(MapColor.CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.25f, 6f).sounds(BlockSoundGroup.STONE).luminance(b -> 15).allowsSpawning(Blocks::never));
+    public static final Block STARBLEACHED_PEARL_BLOCK = new StarbleachedPearlBlock(AbstractBlock.Settings.create().mapColor(MapColor.CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.3f, 6f).sounds(BlockSoundGroup.GLASS).luminance(b -> 12).allowsSpawning(Blocks::never));
     public static final Block STARBLEACH_CAULDRON = new StarbleachCauldronBlock(AbstractBlock.Settings.copyShallow(CAULDRON).luminance(state -> 13));
-    public static final Block STELLAR_TILES = new Block(AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).instrument(Instrument.BASEDRUM).strength(1.75f, 6f).sounds(BlockSoundGroup.DEEPSLATE).luminance(b -> 2).allowsSpawning(Blocks::never));
+    public static final Block STELLAR_TILES = new Block(AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.75f, 6f).sounds(BlockSoundGroup.DEEPSLATE).luminance(b -> 2).allowsSpawning(Blocks::never));
     public static final Block STELLAR_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copyShallow(STELLAR_TILES));
-    public static final Block STELLAR_REPULSOR = new StellarRepulsorBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.BASEDRUM).strength(1.75f, 6f).sounds(BlockSoundGroup.WOOL).luminance(b -> 13).allowsSpawning(Blocks::never));
-    public static final Block BLESSED_CLOTH_BLOCK = new BlessedClothBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL));
+    public static final Block STELLAR_REPULSOR = new StellarRepulsorBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.BASEDRUM).strength(1.75f, 6f).sounds(BlockSoundGroup.WOOL).luminance(b -> 13).allowsSpawning(Blocks::never));
+    public static final Block BLESSED_CLOTH_BLOCK = new BlessedClothBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL));
     public static final Block BLESSED_CLOTH_CARPET = new BlessedClothCarpetBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.1F).sounds(BlockSoundGroup.WOOL));
-    public static final Block BLESSED_CLOTH_CURTAIN = new PaneBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).nonOpaque());
+    public static final Block BLESSED_CLOTH_CURTAIN = new PaneBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sounds(BlockSoundGroup.WOOL).nonOpaque());
     public static final Block BLESSED_BED = new BlessedBedBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY));
 
     public static void init() {

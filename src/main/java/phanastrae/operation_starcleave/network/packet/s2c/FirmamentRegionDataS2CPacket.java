@@ -1,36 +1,37 @@
 package phanastrae.operation_starcleave.network.packet.s2c;
 
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
-import phanastrae.operation_starcleave.network.packet.OperationStarcleavePacketTypes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
+import phanastrae.operation_starcleave.OperationStarcleave;
 import phanastrae.operation_starcleave.world.firmament.FirmamentRegion;
 import phanastrae.operation_starcleave.world.firmament.FirmamentRegionData;
 import phanastrae.operation_starcleave.world.firmament.RegionPos;
 
-public class FirmamentRegionDataS2CPacket implements FabricPacket {
+public record FirmamentRegionDataS2CPacket(long regionId, FirmamentRegionData firmamentRegionData) implements CustomPayload {
+    public static final Id<FirmamentRegionDataS2CPacket> ID = new Id<>(OperationStarcleave.id("firmament_region_data_s2c"));
+    public static final PacketCodec<RegistryByteBuf, FirmamentRegionDataS2CPacket> PACKET_CODEC = new PacketCodec<>() {
+        @Override
+        public FirmamentRegionDataS2CPacket decode(RegistryByteBuf buf) {
+            return new FirmamentRegionDataS2CPacket(
+                    buf.readLong(),
+                    new FirmamentRegionData(buf)
+            );
+        }
 
-    public final long regionId;
-    public final FirmamentRegionData firmamentRegionData;
+        @Override
+        public void encode(RegistryByteBuf buf, FirmamentRegionDataS2CPacket value) {
+            buf.writeLong(value.regionId);
+            value.firmamentRegionData.write(buf);
+        }
+    };
 
     public FirmamentRegionDataS2CPacket(FirmamentRegion region) {
-        this.regionId = RegionPos.fromWorldCoords(region.x, region.z).id;
-        this.firmamentRegionData = new FirmamentRegionData(region);
-    }
-
-    public FirmamentRegionDataS2CPacket(PacketByteBuf packetByteBuf) {
-        this.regionId = packetByteBuf.readLong();
-        this.firmamentRegionData = new FirmamentRegionData(packetByteBuf);
+        this(RegionPos.fromWorldCoords(region.x, region.z).id,  new FirmamentRegionData(region));
     }
 
     @Override
-    public void write(PacketByteBuf buf) {
-        buf.writeLong(this.regionId);
-        this.firmamentRegionData.write(buf);
-    }
-
-    @Override
-    public PacketType<?> getType() {
-        return OperationStarcleavePacketTypes.FIRMAMENT_REGION_DATA_S2C;
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }
