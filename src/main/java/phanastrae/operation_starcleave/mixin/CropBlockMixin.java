@@ -1,6 +1,6 @@
 package phanastrae.operation_starcleave.mixin;
 
-import net.minecraft.block.Block;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.FarmlandBlock;
@@ -23,7 +23,7 @@ public class CropBlockMixin {
     }
 
     @Inject(method = "getAvailableMoisture", at = @At("HEAD"), cancellable = true)
-    private static void operation_starcleave$getAvailableMoisture(Block block, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
+    private static void operation_starcleave$getAvailableMoisture(CallbackInfoReturnable<Float> cir, @Local(argsOnly = true) BlockView world, @Local(argsOnly = true) BlockPos pos) {
         BlockState state = world.getBlockState(pos.down());
         if(state.isOf(OperationStarcleaveBlocks.STELLAR_FARMLAND)) {
             if(state.get(FarmlandBlock.MOISTURE) < 7) {
