@@ -10,7 +10,10 @@ public class OperationStarcleaveParticleTypes {
 
     public static final SimpleParticleType FIRMAMENT_GLIMMER = FabricParticleTypes.simple();
 
-    public static void init() {
+    static {
         Registry.register(Registries.PARTICLE_TYPE, OperationStarcleave.id("firmament_glimmer"), FIRMAMENT_GLIMMER);
+    }
+
+    public static void init() {
     }
 }

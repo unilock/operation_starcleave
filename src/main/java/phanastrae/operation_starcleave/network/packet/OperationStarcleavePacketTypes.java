@@ -1,8 +1,7 @@
 package phanastrae.operation_starcleave.network.packet;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import phanastrae.operation_starcleave.network.packet.c2s.AcknowledgeFirmamentRegionDataC2SPacket;
-import phanastrae.operation_starcleave.network.packet.c2s.AttackFirmamentTileC2SPacket;
+import phanastrae.operation_starcleave.network.packet.c2s.*;
 import phanastrae.operation_starcleave.network.packet.s2c.*;
 
 public class OperationStarcleavePacketTypes {

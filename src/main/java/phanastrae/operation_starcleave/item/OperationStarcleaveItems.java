@@ -57,7 +57,7 @@ public class OperationStarcleaveItems {
             .displayName(Text.translatable("itemGroup.operation_starcleave.group"))
             .build();
 
-    public static void init() {
+    static {
         Registry.register(Registries.ITEM_GROUP, OperationStarcleave.id("operation_starcleave"), OPERATION_STARCLEAVE_GROUP);
 
         registerWithIG(NETHERITE_PUMPKIN, "netherite_pumpkin");
@@ -86,8 +86,6 @@ public class OperationStarcleaveItems {
         registerWithIG(BLESSED_CLOTH_CURTAIN, "blessed_cloth_curtain");
         registerWithIG(BLESSED_BED, "blessed_bed");
 
-        Item.BLOCK_ITEMS.put(OperationStarcleaveBlocks.STARBLEACH_CAULDRON, Items.CAULDRON);
-
         registerWithIG(STARBLEACH_BOTTLE, "starbleach_bottle");
         registerWithIG(SPLASH_STARBLEACH_BOTTLE, "splash_starbleach_bottle");
         registerWithIG(STARBLEACHED_PEARL, "starbleached_pearl");
@@ -98,6 +96,10 @@ public class OperationStarcleaveItems {
         registerWithIG(FIRMAMENT_MANIPULATOR, "firmament_manipulator");
 
         registerWithIG(STARCLEAVER_GOLEM_SPAWN_EGG, "starcleaver_golem_spawn_egg");
+    }
+
+    public static void init() {
+        Item.BLOCK_ITEMS.put(OperationStarcleaveBlocks.STARBLEACH_CAULDRON, Items.CAULDRON);
 
         addToVanillaItemGroups();
     }
